@@ -18,7 +18,7 @@ describe("build-timestamp", () => {
     `;
     hydrateBuildTimestamp();
     const badge = document.querySelector("span");
-    expect(badge?.textContent).toBe("Build time unavailable");
+    expect(badge?.textContent?.trim()).toBe("Build time unavailable");
   });
 
   it("formats valid timestamp", () => {

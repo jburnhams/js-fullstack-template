@@ -12,6 +12,10 @@ export function hydrateBuildTimestamp(): void {
 
   try {
     const date = new Date(timestamp);
+    if (isNaN(date.getTime())) {
+      badge.textContent = "Build time unavailable";
+      return;
+    }
     const formatted = date.toLocaleString("en-US", {
       month: "short",
       day: "numeric",
