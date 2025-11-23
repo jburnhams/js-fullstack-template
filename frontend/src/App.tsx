@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Calculator } from "./components/Calculator";
 import { ResultDisplay } from "./components/ResultDisplay";
+import { BuildTimestampBadge } from "./components/BuildTimestampBadge";
 import type { CalculationResult } from "./types";
 
 export function App() {
@@ -41,12 +42,7 @@ export function App() {
       {result && <ResultDisplay result={result} />}
 
       <footer className="build-info">
-        <span
-          className="build-info__badge"
-          data-build-timestamp="__BUILD_TIMESTAMP__"
-        >
-          Build time unavailable
-        </span>
+        <BuildTimestampBadge timestamp="__BUILD_TIMESTAMP__" />
       </footer>
     </main>
   );
