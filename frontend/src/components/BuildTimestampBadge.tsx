@@ -11,7 +11,7 @@ export function BuildTimestampBadge({
 
   useEffect(() => {
     const span = spanRef.current;
-    if (!span || !timestamp || timestamp === "__BUILD_TIMESTAMP__") {
+    if (!span || !timestamp) {
       return;
     }
 
