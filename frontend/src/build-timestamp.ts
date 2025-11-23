@@ -1,16 +1,12 @@
-const PLACEHOLDER = "__BUILD_TIMESTAMP__";
-
 export function hydrateBuildTimestamp(): void {
-  const badge = document.querySelector<HTMLElement>(
-    `[data-build-timestamp="${PLACEHOLDER}"]`
-  );
+  const badge = document.querySelector<HTMLElement>('[data-build-timestamp]');
 
   if (!badge) {
     return;
   }
 
   const timestamp = badge.dataset.buildTimestamp;
-  if (!timestamp || timestamp === PLACEHOLDER) {
+  if (!timestamp) {
     return;
   }
 
