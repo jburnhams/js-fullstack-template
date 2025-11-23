@@ -1,4 +1,4 @@
-name = "js-fullstack-template"
+name = "template"
 main = "src/worker.ts"
 tsconfig = "./tsconfig.json"
 compatibility_date = "2025-02-14"
