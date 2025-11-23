@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { Calculator } from "../components/Calculator";
+import { Calculator } from "../src/components/Calculator";
 
 describe("Calculator", () => {
   const mockOnResult = vi.fn();
@@ -22,11 +22,9 @@ describe("Calculator", () => {
   it("calls onError when invalid numbers are entered", async () => {
     render(<Calculator onResult={mockOnResult} onError={mockOnError} />);
 
-    const firstInput = screen.getByLabelText(/First Number/i);
-    const calculateButton = screen.getByRole("button", { name: /Calculate/i });
+    const form = screen.getByRole("button", { name: /Calculate/i }).closest("form")!;
 
-    fireEvent.change(firstInput, { target: { value: "not a number" } });
-    fireEvent.click(calculateButton);
+    fireEvent.submit(form);
 
     await waitFor(() => {
       expect(mockOnError).toHaveBeenCalledWith("Please enter valid numbers");

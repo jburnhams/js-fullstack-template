@@ -2,7 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 import { App } from "./App";
-import { hydrateBuildTimestamp } from "./build-timestamp";
 import "./styles.css";
 
 const container = document.getElementById("root");
@@ -17,7 +16,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-queueMicrotask(() => {
-  hydrateBuildTimestamp();
-});
