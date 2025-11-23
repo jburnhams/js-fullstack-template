@@ -10,9 +10,9 @@ describe("build-timestamp", () => {
     expect(() => hydrateBuildTimestamp()).not.toThrow();
   });
 
-  it("does nothing when timestamp is placeholder", () => {
+  it("does nothing when timestamp is empty", () => {
     document.body.innerHTML = `
-      <span data-build-timestamp="__BUILD_TIMESTAMP__">
+      <span data-build-timestamp="">
         Build time unavailable
       </span>
     `;
