@@ -36,7 +36,7 @@ export function BuildTimestampBadge({
   }, [timestamp]);
 
   return (
-    <span className="build-info__badge" ref={spanRef}>
+    <span className="inline-block py-1 px-3 bg-surface border border-border rounded text-sm text-text-dim font-mono" ref={spanRef}>
       Build time unavailable
     </span>
   );

@@ -21,27 +21,27 @@ export function App() {
   };
 
   return (
-    <main className="page">
-      <header>
-        <h1>Calculator App</h1>
-        <p>A simple calculator with a Cloudflare Worker backend.</p>
+    <main className="max-w-[800px] mx-auto">
+      <header className="mb-12 text-center">
+        <h1 className="text-[2.5rem] mb-2 text-primary sm:text-[2rem]">Calculator App</h1>
+        <p className="text-text-dim text-[1.1rem]">A simple calculator with a Cloudflare Worker backend.</p>
       </header>
 
-      <section>
-        <h2>Calculate</h2>
+      <section className="bg-surface border border-border rounded-lg p-6 mb-8">
+        <h2 className="text-[1.5rem] mb-4 text-primary">Calculate</h2>
         <Calculator onResult={handleResult} onError={handleError} />
       </section>
 
       {error && (
-        <section className="error">
-          <h2>Error</h2>
-          <pre>{error}</pre>
+        <section className="bg-error-bg border border-error-border rounded-lg p-6 mb-8">
+          <h2 className="text-[1.5rem] mb-4 text-[#fca5a5]">Error</h2>
+          <pre className="font-mono text-[0.9rem] whitespace-pre-wrap break-words text-[#fecaca]">{error}</pre>
         </section>
       )}
 
       {result && <ResultDisplay result={result} />}
 
-      <footer className="build-info">
+      <footer className="text-center p-4 bg-transparent border-none">
         <BuildTimestampBadge timestamp="__BUILD_TIMESTAMP__" />
       </footer>
     </main>

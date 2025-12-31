@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { handleRequest } from "../src/worker";
+import { describe, expect, it, vi } from "vitest";
+import { handleRequest } from "../../src/worker";
 
 const dummyCtx = {
   waitUntil: () => {},
