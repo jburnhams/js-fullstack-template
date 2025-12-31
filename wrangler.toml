@@ -3,6 +3,10 @@ main = "src/worker.ts"
 tsconfig = "./tsconfig.json"
 compatibility_date = "2025-02-14"
 
+[assets]
+directory = "./frontend/dist"
+binding = "ASSETS"
+
 [build]
-command = "npm run generate:frontend"
-watch_dir = ["frontend", "scripts", "src/frontend"]
+command = "npm run build:frontend"
+watch_dir = ["frontend", "src"]

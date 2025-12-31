@@ -21,6 +21,7 @@
     "test:coverage:frontend": "vitest run --config vitest.config.frontend.ts --coverage"
   },
   "dependencies": {
+    "hono": "^4.11.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
