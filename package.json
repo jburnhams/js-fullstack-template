@@ -11,7 +11,7 @@
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "dev:node": "tsx src/server.ts",
-    "build:frontend": "vite build --config frontend/vite.config.ts",
+    "build:frontend": "node frontend/generate-build-info.js && vite build --config frontend/vite.config.ts",
     "test": "npm run test:unit-node && npm run test:unit-dom && npm run test:integration && npm run test:browser",
     "test:unit-node": "vitest run --config vitest.config.unit-node.ts --coverage",
     "test:unit-dom": "vitest run --config vitest.config.unit-dom.ts --coverage",

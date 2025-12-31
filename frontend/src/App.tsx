@@ -42,7 +42,7 @@ export function App() {
       {result && <ResultDisplay result={result} />}
 
       <footer className="text-center p-4 bg-transparent border-none">
-        <BuildTimestampBadge timestamp="__BUILD_TIMESTAMP__" />
+        <BuildTimestampBadge />
       </footer>
     </main>
   );
