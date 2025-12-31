@@ -13,13 +13,10 @@
     "dev:node": "tsx src/server.ts",
     "build:frontend": "vite build --config frontend/vite.config.ts",
     "test": "npm run test:unit-node && npm run test:unit-dom && npm run test:integration && npm run test:browser",
-    "test:unit-node": "vitest run --config vitest.config.unit-node.ts",
-    "test:unit-dom": "vitest run --config vitest.config.unit-dom.ts",
+    "test:unit-node": "vitest run --config vitest.config.unit-node.ts --coverage",
+    "test:unit-dom": "vitest run --config vitest.config.unit-dom.ts --coverage",
     "test:integration": "vitest run --config vitest.config.integration.ts",
-    "test:browser": "playwright test -c playwright.config.ts",
-    "test:coverage": "npm run test:coverage:backend && npm run test:coverage:frontend",
-    "test:coverage:backend": "vitest run --config vitest.config.backend.ts --coverage",
-    "test:coverage:frontend": "vitest run --config vitest.config.frontend.ts --coverage"
+    "test:browser": "playwright test -c playwright.config.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.7",
