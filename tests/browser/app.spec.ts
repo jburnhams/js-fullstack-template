@@ -15,6 +15,7 @@ test("app works in browser", async ({ page }) => {
 
   // Wait for result
   await expect(page.locator(".bg-result-bg")).toBeVisible();
-  await expect(page.getByText("15")).toBeVisible();
+  // Ensure we select the result specifically, avoiding "10 + 5 = 15"
+  await expect(page.getByText("15", { exact: true })).toBeVisible();
   await expect(page.getByText("10 + 5 = 15")).toBeVisible();
 });

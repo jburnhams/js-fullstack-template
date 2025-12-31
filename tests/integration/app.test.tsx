@@ -1,53 +1,12 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { describe, expect, it, beforeAll, afterAll, afterEach } from "vitest";
-import { setupServer } from "msw/node";
-import { http, HttpResponse } from "msw";
+import { describe, expect, it } from "vitest";
 import { App } from "../../frontend/src/App";
 
-// Helper to create a delay
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// We no longer use MSW. We rely on the global Miniflare instance running on port 8788.
 
-const handlers = [
-  http.post("/api/calculate", async ({ request }) => {
-    // Read the body to verify request format if needed
-    const body = await request.json() as any;
-
-    // Simulate processing delay
-    await delay(50);
-
-    if (body.operation === "add") {
-       return HttpResponse.json({
-         result: body.a + body.b,
-         operation: "add",
-         operands: { a: body.a, b: body.b },
-       });
-    }
-
-    if (body.operation === "divide" && body.b === 0) {
-        return HttpResponse.json(
-            { error: "CALCULATION_ERROR", message: "Division by zero" },
-            { status: 400 }
-        );
-    }
-
-    return HttpResponse.json(
-        { error: "INVALID_OPERATION", message: "Not implemented in mock" },
-        { status: 400 }
-    );
-  }),
-];
-
-const server = setupServer(...handlers);
-
-describe("Integration: App with MSW", () => {
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
-
-  it("calculates addition correctly using mocked backend", async () => {
+describe("Integration: App with Miniflare", () => {
+  it("calculates addition correctly using real Miniflare backend", async () => {
     render(<App />);
-
-    // Wait for app to load (if any initial load)
 
     const inputA = screen.getByLabelText(/First Number/i);
     const inputB = screen.getByLabelText(/Second Number/i);
@@ -66,6 +25,9 @@ describe("Integration: App with MSW", () => {
     });
 
     expect(screen.getByText("10 + 20 = 30")).toBeInTheDocument();
+    // Use regular expression or exact match if it's unique, but strict mode might find multiple if ambiguous.
+    // Given the failure was in browser test, let's check here too.
+    // In integration test, getByText defaults to strict.
     expect(screen.getByText("30")).toBeInTheDocument();
   });
 
@@ -87,6 +49,6 @@ describe("Integration: App with MSW", () => {
       expect(screen.getByText("Error")).toBeInTheDocument();
     });
 
-    expect(screen.getByText("Division by zero")).toBeInTheDocument();
+    expect(screen.getByText(/Division by zero/)).toBeInTheDocument();
   });
 });
