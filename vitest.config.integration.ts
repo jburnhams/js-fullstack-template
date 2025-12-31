@@ -6,7 +6,7 @@ export default defineConfig({
   test: {
     include: ["tests/integration/**/*.{test,spec}.tsx"],
     environment: "happy-dom",
-    setupFiles: ["tests/unit-dom/setup.ts"], // Reusing setup.ts from unit-dom as it likely has @testing-library/jest-dom
+    setupFiles: ["tests/integration/setup.ts"],
     globals: true,
   },
 });

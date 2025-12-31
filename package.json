@@ -10,6 +10,7 @@
     "build": "npm run build:frontend",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
+    "dev:node": "tsx src/server.ts",
     "build:frontend": "vite build --config frontend/vite.config.ts",
     "test": "npm run test:unit-node && npm run test:unit-dom && npm run test:integration && npm run test:browser",
     "test:unit-node": "vitest run --config vitest.config.unit-node.ts",
@@ -21,9 +22,11 @@
     "test:coverage:frontend": "vitest run --config vitest.config.frontend.ts --coverage"
   },
   "dependencies": {
+    "@hono/node-server": "^1.19.7",
     "hono": "^4.11.3",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20251231.0",
