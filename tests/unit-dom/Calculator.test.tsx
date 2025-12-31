@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import { Calculator } from "../src/components/Calculator";
+import { Calculator } from "../../frontend/src/components/Calculator";
 
 describe("Calculator", () => {
   const mockOnResult = vi.fn();

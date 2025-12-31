@@ -1,4 +1,4 @@
-name: CI
+name: Test Unit Node
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build-test-coverage:
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -25,11 +25,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
-
-      - name: Run tests
-        run: npm test -- --run
-
-      - name: Run coverage
-        run: npm run test:coverage
+      - name: Run Unit Node Tests
+        run: npm run test:unit-node

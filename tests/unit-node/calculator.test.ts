@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculate, createCalculationResult } from "../src/calculator";
+import { calculate, createCalculationResult } from "../../src/calculator";
 
 describe("calculator", () => {
   describe("calculate", () => {
