@@ -9,20 +9,6 @@ import { handlers } from "../mocks/handlers";
 let mf: Miniflare;
 export const server = setupServer(...handlers);
 
-// Helper to find a free port
-const getFreePort = async () => {
-  const { createServer } = await import('net');
-  return new Promise<number>((resolve, reject) => {
-    const server = createServer();
-    server.listen(0, () => {
-      const address = server.address();
-      const port = typeof address === 'object' && address ? address.port : 0;
-      server.close(() => resolve(port));
-    });
-    server.on('error', reject);
-  });
-};
-
 beforeAll(async () => {
   // Start MSW server
   server.listen();
@@ -36,31 +22,33 @@ beforeAll(async () => {
     platform: "neutral",
   });
 
-  const port = await getFreePort();
-
   mf = new Miniflare({
     modules: true,
     scriptPath: "./dist/test-worker.js",
     compatibilityDate: "2024-01-01",
     compatibilityFlags: ["nodejs_compat"],
-    port: port,
   });
 
   await mf.ready;
 
-  // Polyfill fetch to hit the Miniflare URL for relative paths
+  // Polyfill fetch to hit the Miniflare via dispatchFetch for relative paths
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async (input, init) => {
-    let url = input;
-    if (typeof input === "string") {
-       if (input.startsWith("/")) {
-          url = `http://localhost:${port}${input}`;
-       }
-    } else if (input instanceof URL && input.pathname.startsWith("/")) {
-       // Do nothing, let it flow? Or handle it.
+    let urlStr = typeof input === "string" ? input : input instanceof URL ? input.toString() : input instanceof Request ? input.url : "";
+
+    // If it's a relative URL, assume it's for our backend
+    if (urlStr.startsWith("/")) {
+       const requestUrl = `http://localhost${urlStr}`;
+       // We need to pass the body and headers from init
+       return mf.dispatchFetch(requestUrl, init) as unknown as Promise<Response>;
     }
 
-    return originalFetch(url, init);
+    // Also handle absolute localhost URLs if any
+    if (urlStr.includes("localhost")) {
+        return mf.dispatchFetch(urlStr, init) as unknown as Promise<Response>;
+    }
+
+    return originalFetch(input, init);
   };
 });
 
