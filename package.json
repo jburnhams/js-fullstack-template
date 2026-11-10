@@ -20,31 +20,31 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.19.7",
-    "hono": "^4.11.3",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "tsx": "^4.21.0"
+    "hono": "^4.13.16",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsx": "^4.23.15"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20251231.0",
-    "@playwright/test": "^1.50.1",
-    "@tailwindcss/vite": "^4.1.18",
+    "@playwright/test": "^1.65.0",
+    "@tailwindcss/vite": "^4.3.5",
     "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.1",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@testing-library/react": "^16.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^5.1.2",
     "@vitest/coverage-v8": "^4.0.16",
-    "autoprefixer": "^10.4.23",
+    "autoprefixer": "^10.6.2",
     "happy-dom": "^16.3.0",
     "jsdom": "^27.4.0",
-    "miniflare": "^4.20251217.0",
+    "miniflare": "^4.20260730.0",
     "msw": "^2.7.0",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.32",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vitest": "^4.0.16",
-    "wrangler": "^4.54.0"
+    "wrangler": "^4.158.0"
   }
 }
